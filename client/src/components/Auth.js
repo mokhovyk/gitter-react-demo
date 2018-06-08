@@ -1,21 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 
-import {
-  Link,
-} from 'react-router-dom';
+import { fetchUser } from '../actions/user';
 
-class Home2 extends Component {
-  constructor(props) {
-    super(props);
-  };
-  
-  // save user to localstorage
+class Auth extends Component {
+  componentDidMount() {
+    this.props.fetchUserAction();
+  }
 
   render() {
+    const { isAuthorized, displayName, avatarUrl } = this.props;
+
     return (
-      <div><Link to="/">back</Link></div>
+      <div>
+        {isAuthorized ?
+          <a href="/logout">logout</a> :
+          <a href="/login">login</a>
+        }
+        <br />
+        {isAuthorized &&
+          <Fragment>
+            <img src={avatarUrl} height="50px" alt="avatar" />
+            <div>displayName: {displayName}</div>
+          </Fragment>
+        }
+      </div>
     );
   }
 }
 
-export default Home2;
+const mapStateToProps = ({ user }) => ({
+  isAuthorized: user.isAuthorized,
+  displayName: user.displayName,
+  avatarUrl: user.avatarUrl,
+});
+
+export default connect(mapStateToProps, {
+  fetchUserAction: fetchUser,
+})(Auth);
