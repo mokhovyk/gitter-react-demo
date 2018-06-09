@@ -1,7 +1,9 @@
 const path = require('path');
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 module.exports = {
-  mode: process.env.NODE_ENV === 'development' ? 'development': 'production',
+  mode: isDevelopment ? 'development': 'production',
 
   entry: path.join(__dirname, '/client/src/index.js'),
 
@@ -16,12 +18,12 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader?presets[]=es2015,presets[]=react,presets[]=stage-2',
+          loader: 'babel-loader?presets[]=es2017,presets[]=react,presets[]=stage-2',
         }
       }
     ]
   },
 
   // start Webpack in a watch mode, so Webpack will rebuild the bundle on changes
-  watch: true
+  watch: isDevelopment
 };
