@@ -7,19 +7,19 @@ import {
 
 import Auth from '../components/Auth';
 import Account from '../components/Account';
-import Chat from '../components/Chat';
+import ChatContainer from '../containers/ChatContainer';
 import Rooms from '../components/Rooms';
 
 const routes = [
   {
     path: "/",
     exact: true,
-    sidebar: () => <div>home!</div>,
+    sidebar: null,
     main: () => <h2>Home</h2>
   },
   {
     path: "/account",
-    sidebar: () => <div>account!</div>,
+    sidebar: () => <Link to="/room" className="btn btn-primary">Go to rooms</Link>,
     main: Account,
   },
   {
@@ -32,7 +32,7 @@ const routes = [
     path: "/room/:id",
     exact: true,
     sidebar: Rooms,
-    main: Chat
+    main: ChatContainer
   }
 ];
 
@@ -41,16 +41,15 @@ class Root extends Component {
     return (
       <Router>
         <Fragment>
-          <header className="navbar navbar-expand">
-            <span>Logo</span>
-            <Link to="/account">Account</Link>
-            <Auth />
+          <header className="navbar navbar-expand navbar-dark bg-dark">
+            <span className="navbar-brand" >Logo</span>
+            <div className="ml-auto">
+              <Auth />
+            </div>
           </header>
           <div className="container-fluid">
             <div className="row">
-              <aside className="col-3">
-                <Link to="/room">go to rooms</Link>
-
+              <aside className="col-3 p-3">
                 {routes.map((route, index) => (
                   <Route
                     key={index}
@@ -60,7 +59,7 @@ class Root extends Component {
                   />
                 ))}
               </aside>
-              <main className="col-9">
+              <main className="col-9 p-3">
                 {routes.map((route, index) => (
                   <Route
                     key={index}

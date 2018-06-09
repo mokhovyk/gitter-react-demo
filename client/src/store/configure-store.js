@@ -4,7 +4,7 @@ import { createLogger } from 'redux-logger';
 
 import user from '../reducers/user';
 import rooms from '../reducers/rooms';
-import chat from '../reducers/chat';
+import chatCollection from '../reducers/chatCollection';
 
 const middlewares = [thunk];
 
@@ -17,7 +17,7 @@ export default () => (
     combineReducers({
       user,
       rooms,
-      chat,
+      chatCollection,
     }),
     applyMiddleware(...middlewares),
   )

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { fetchUser } from '../actions/user';
 
@@ -12,19 +13,24 @@ class Auth extends Component {
     const { isAuthorized, displayName, avatarUrl } = this.props;
 
     return (
-      <div>
-        {isAuthorized ?
-          <a href="/logout">logout</a> :
-          <a href="/login">login</a>
-        }
-        <br />
+      <ul className="navbar-nav flex-row">
         {isAuthorized &&
-          <Fragment>
-            <img src={avatarUrl} height="50px" alt="avatar" />
-            <div>displayName: {displayName}</div>
-          </Fragment>
+          <li className="nav-item">
+            <Link to="/account" className="btn-group mr-3">
+              <div className="btn-group">
+                <img src={avatarUrl} height="38px" alt="avatar" className="rounded-left" />
+              </div>
+              <span className="btn btn-primary">{displayName}</span>
+            </Link>
+          </li>
         }
-      </div>
+        <li className="nav-item">
+          {isAuthorized ?
+            <a className="btn btn-primary" href="/logout">logout</a> :
+            <a className="btn btn-primary" href="/login">login</a>
+          }
+        </li>
+      </ul>
     );
   }
 }

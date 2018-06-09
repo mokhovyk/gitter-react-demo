@@ -3,26 +3,12 @@ const passport = require('passport');
 const path = require('path');
 const OAuth2Strategy = require('passport-oauth2');
 const gitter = require('./gitter');
-const session = require('express-session');
-const uuid = require('uuid/v4');
 
 const router = express.Router();
 
 const gitterHost = 'https://gitter.im';
 const clientId = process.env.GITTER_KEY ? process.env.GITTER_KEY.trim() : 'af93f30de7ce8d102d264b63c7601d18f0ad36d9';
 const clientSecret  = process.env.GITTER_SECRET ? process.env.GITTER_SECRET.trim() : '05a45c2a65acc2c9e1b318e1f9d707ec137cf530';
-
-// router.use(session({
-//   secret: 'keyboard cat',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: true },
-//   genid: (req) => {
-//     console.log('router middleware');
-//     console.log(req.sessionID);
-//     return uuid() // use UUIDs for session IDs
-//   },
-// }));
 
 passport.use(new OAuth2Strategy({
     authorizationURL: gitterHost + '/login/oauth/authorize',
@@ -32,8 +18,8 @@ passport.use(new OAuth2Strategy({
     callbackURL: '/login/callback',
     passReqToCallback: true
   },
-  function (request, accessToken, refreshToken, profile, done) {
-    request.session.accessToken = accessToken;
+  function (req, accessToken, refreshToken, profile, done) {
+    req.session.accessToken = accessToken;
 
     gitter.fetchCurrentUser(accessToken, (err, user) => {
       return (err ? done(err) : done(null, user));
@@ -60,44 +46,37 @@ router.get('/login/callback',
    })
 );
 
-router.get('/logout', function(req, res) {
+router.get('/logout', function(req) {
   req.session.destroy();
   req.redirect('/');
 });
 
 router.get('/user', function(req, res) {
-  gitter.fetchCurrentUser(req.session.accessToken, (err, user) => {
+  gitter.fetchCurrentUser(req.session.accessToken, (err, payload) => {
     if (err) {
       return res.sendStatus(500);
     } else {
-      res.json(user);
+      res.json(payload);
     }
   });
 });
 
 router.get('/rooms', function(req, res) {
-  const userId = req.query.user;
-
-  gitter.fetchRooms(userId, req.session.accessToken, (err, rooms) => {
+  gitter.fetchRooms(req.query.user, req.session.accessToken, (err, payload) => {
     if (err) {
       return res.sendStatus(500);
     } else {
-      res.json(rooms);
+      res.json(payload);
     }
   });
 });
 
-
 router.get('/chat/:id', function(req, res) {
-  const roomId = req.params.id;
-
-  gitter.fetchChatMessages(roomId, req.session.accessToken, (err, messages) => {
-    console.log('messages', messages);
-
+  gitter.fetchChatMessages(req.params.id, req.session.accessToken, (err, payload) => {
     if (err) {
       return res.sendStatus(500);
     } else {
-      res.json(messages);
+      res.json(payload);
     }
   });
 });

@@ -34,15 +34,11 @@ const gitter = {
   },
 
   fetchRooms: function(userId, token, cb) {
-    this.fetch('/api/v1/user/' + userId + '/rooms', token, function(err, rooms) {
-      cb(err, rooms);
-    });
+    this.fetch('/api/v1/user/' + userId + '/rooms', token, cb);
   },
   
   fetchChatMessages: function(roomId, token, cb) {
-    this.fetch('/api/v1/rooms/' + roomId + '/chatMessages?limit=50', token, function(err, messages) {
-      cb(err, messages);
-    });
+    this.fetch('/api/v1/rooms/' + roomId + '/chatMessages?limit=50', token, cb);
   }
 };
 

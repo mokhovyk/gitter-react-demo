@@ -2,8 +2,9 @@ import {
   RECEIVE_CHAT,
 } from './types';
 
-export const receiveChat = (data) => ({
+export const receiveChat = (roomId, data) => ({
   type: RECEIVE_CHAT,
+  id: roomId,
   messages: data,
 });
 
@@ -15,7 +16,7 @@ export const fetchChatMessages = (roomId) => (dispatch) => {
       return response.json();
     })
     .then(data => {
-      dispatch(receiveChat(data))
+      dispatch(receiveChat(roomId, data))
     })
     .catch(() => {
       throw Error();

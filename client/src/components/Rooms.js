@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -13,21 +13,28 @@ class Rooms extends PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { userId } = this.props;
+    
+    if (userId && prevProps.userId !== userId) {
+       this.props.fetchRoomsAction(userId);
+    }
+  }
+
   render() {
-    const { userId, items } = this.props;
+    const { items } = this.props;
 
     return (
-      <div>
-        <div>userId: {userId}</div>
-        <ul>
+      <Fragment>
+        <ul className="list-group">
           {items.map((item) => (
-            <li key={item.id}>
+            <li key={item.id} className="list-group-item">
               <img height="50px" src={item.avatarUrl} />
               <Link to={`/room/${item.id}`}>{item.name}</Link>
             </li>
           ))}
         </ul>
-      </div>
+      </Fragment>
     );
   }
 }

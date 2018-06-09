@@ -3,6 +3,7 @@ import {
 } from '../actions/types';
 
 export const INITIAL_STATE = {
+  activeRoom: '',
   items: [],
 };
 
