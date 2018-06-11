@@ -7,8 +7,8 @@ const gitter = require('./gitter');
 const router = express.Router();
 
 const gitterHost = 'https://gitter.im';
-const clientId = process.env.GITTER_KEY ? process.env.GITTER_KEY.trim() : 'a30c5e417fc0e8769291427bf56a4d51a87d39c2';
-const clientSecret  = process.env.GITTER_SECRET ? process.env.GITTER_SECRET.trim() : '5e100e1d1a6f334de59f21f150512a457411c520';
+const clientId = process.env.GITTER_KEY ? process.env.GITTER_KEY.trim() : undefined;
+const clientSecret  = process.env.GITTER_SECRET ? process.env.GITTER_SECRET.trim() : undefined;
 
 passport.use(new OAuth2Strategy({
     authorizationURL: gitterHost + '/login/oauth/authorize',
@@ -46,9 +46,9 @@ router.get('/login/callback',
    })
 );
 
-router.get('/logout', function(req) {
+router.get('/logout', function(req, res) {
   req.session.destroy();
-  req.redirect('/');
+  res.redirect('/');
 });
 
 router.get('/user', function(req, res) {

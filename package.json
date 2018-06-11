@@ -49,12 +49,14 @@
   },
   "scripts": {
     "clean": "rm -rf ./client/build",
-    "server": "node server/index.js",
+    "server": "GITTER_KEY=a30c5e417fc0e8769291427bf56a4d51a87d39c2 GITTER_SECRET=5e100e1d1a6f334de59f21f150512a457411c520 node server",
+    "server:local": "GITTER_KEY=af93f30de7ce8d102d264b63c7601d18f0ad36d9 GITTER_SECRET=05a45c2a65acc2c9e1b318e1f9d707ec137cf530 node server",
     "build": "NODE_ENV=production webpack",
     "build:dev": "NODE_ENV=development webpack",
     "test": "NODE_ENV=test jest --coverage --runInBand --no-cache",
     "lint": "eslint src --cache --cache-location '.eslintcachefile'",
     "flow": "flow",
+    "start:local": "npm run clean && npm run build && npm run server:local",
     "start": "npm run clean && npm run build && npm run server"
   }
 }
