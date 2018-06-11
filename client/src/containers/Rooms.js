@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,7 +8,8 @@ import { fetchRooms } from '../actions/rooms';
 type PropsT = {
   userId: string,
   items: Array<any>,
-  fetchRoomsAction: any,
+  fetchRoomsAction: (string) => void,
+  match: Object
 };
 
 class Rooms extends PureComponent<PropsT> {
@@ -19,7 +21,7 @@ class Rooms extends PureComponent<PropsT> {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: PropsT) {
     const { userId } = this.props;
 
     if (userId && prevProps.userId !== userId) {
@@ -50,7 +52,7 @@ class Rooms extends PureComponent<PropsT> {
   }
 }
 
-const mapStateToProps = ({ user, rooms }) => ({
+const mapStateToProps = ({ user, rooms }): Object => ({
   userId: user.userId,
   items: rooms.items,
 });

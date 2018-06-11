@@ -1,3 +1,4 @@
+// @flow
 import {
   REQUEST_ROOMS,
   RECEIVE_ROOMS,
@@ -7,6 +8,7 @@ import {
 
 import api from '../helpers/api';
 
+type FunctionType = (any) => void;
 
 export const errorRooms = () => ({
   type: INVALIDATE_ROOMS,
@@ -16,17 +18,17 @@ export const requestRooms = () => ({
   type: REQUEST_ROOMS,
 });
 
-export const receiveRooms = (data) => ({
+export const receiveRooms = (data: Object) => ({
   type: RECEIVE_ROOMS,
   items: data,
 });
 
-export const setActiveRoom = (activeItemId) => ({
+export const setActiveRoom = (activeItemId: string) => ({
   type: SET_ACTIVE_ROOM,
   activeItemId,
 });
 
-export const fetchRooms = (userId) => async (dispatch) => {
+export const fetchRooms = (userId: string) => async (dispatch: FunctionType) => {
   dispatch(requestRooms());
 
   try {

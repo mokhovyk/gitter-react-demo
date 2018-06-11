@@ -5,7 +5,7 @@ type PropsT = {
   messages: Array<any>,
   isLoading: boolean,
   name: string,
-  onLoadMore: any,
+  onLoadMore: () => void,
   hasMore: boolean
 };
 

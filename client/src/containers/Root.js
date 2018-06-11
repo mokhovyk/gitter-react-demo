@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, Fragment } from 'react';
 import {
   BrowserRouter as Router,
@@ -12,6 +13,10 @@ import ChatContainer from './ChatContainer';
 import Rooms from './Rooms';
 import { fetchUser } from '../actions/user';
 
+type PropsT = {
+  fetchUserAction: () => void
+};
+
 const routes = [
   {
     path: '/',
@@ -21,6 +26,7 @@ const routes = [
   },
   {
     path: '/account',
+    exact: false,
     sidebar: () => <Link to="/room" className="btn btn-primary">Go to rooms</Link>,
     main: Account,
   },
@@ -38,7 +44,7 @@ const routes = [
   }
 ];
 
-class Root extends Component {
+class Root extends Component<PropsT> {
   componentDidMount() {
     this.props.fetchUserAction();
   }

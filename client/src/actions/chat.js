@@ -7,6 +7,8 @@ import {
 
 import api from '../helpers/api';
 
+type FunctionType = (any) => void;
+
 export const errorChat = (roomId: string) => ({
   type: INVALIDATE_CHAT,
   id: roomId,
@@ -23,7 +25,7 @@ export const receiveChat = (roomId: string, data: any) => ({
   messages: data,
 });
 
-export const fetchChatMessages = (roomId: string, after: any) => async (dispatch: any) => {
+export const fetchChatMessages = (roomId: string, after: any) => async (dispatch: FunctionType) => {
   dispatch(requestChat(roomId));
 
   try {

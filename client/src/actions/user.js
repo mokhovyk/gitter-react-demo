@@ -1,14 +1,18 @@
+// @flow
 import {
   RECEIVE_USER,
   REMOVE_USER,
 } from './types';
 
+import api from '../helpers/api';
+
+type FunctionType = (any) => void;
 
 export const removeUser = () => ({
   type: REMOVE_USER,
 });
 
-export const receiveUser = (data) => ({
+export const receiveUser = (data: Object) => ({
   type: RECEIVE_USER,
   userId: data.id,
   userName: data.username,
@@ -16,17 +20,11 @@ export const receiveUser = (data) => ({
   avatarUrl: data.avatarUrl,
 });
 
-export const fetchUser = () => (dispatch) => {
-  fetch('/user', {
-    credentials: 'include',
-  })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(data => {
-      dispatch(receiveUser(data))
-    })
-    .catch(() => {
-      throw Error();
-    });
+export const fetchUser = () => async (dispatch: FunctionType) => {
+  try {
+    const payload = await api(`/user`);
+    dispatch(receiveUser(payload))
+  } catch (error) {
+    throw Error();
+  }
 };

@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -7,9 +8,9 @@ import { setActiveRoom } from '../actions/rooms';
 import Chat from '../components/Chat';
 
 type PropsT = {
-  setActiveRoomAction: any,
-  fetchChatMessagesAction: any,
-  match: any,
+  setActiveRoomAction: (string) => void,
+  fetchChatMessagesAction: (string, ?string) => void,
+  match: Object,
   chatCollection: Object,
   rooms: Array<any>
 };
@@ -20,7 +21,7 @@ type StateT = {
 }
 
 class ChatContainer extends Component<PropsT, StateT> {
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props: PropsT, state: StateT) {
     const { id } = props.match.params;
     let { name } = state;
 
@@ -37,10 +38,18 @@ class ChatContainer extends Component<PropsT, StateT> {
     };
   }
 
-  state = {
+  state: StateT = {
     id: '',
     name: '',
   };
+
+  componentDidUpdate(prevProps: PropsT) {
+    const { rooms } = this.props;
+
+    if (prevProps.rooms !== rooms) {
+      this.props.fetchChatMessagesAction(this.state.id);
+    }
+  }
 
   render() {
     const { chatCollection, fetchChatMessagesAction } = this.props;
@@ -57,7 +66,7 @@ class ChatContainer extends Component<PropsT, StateT> {
   }
 }
 
-const mapStateToProps = ({ chatCollection, rooms }) => ({
+const mapStateToProps = ({ chatCollection, rooms }): Object => ({
   chatCollection,
   rooms: rooms.items,
 });
