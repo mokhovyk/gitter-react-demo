@@ -5,4 +5,5 @@
 3. `open http://localhost:7000`
 
 or
-`open http://stormy-temple-57264.herokuapp.com/`
+
+open http://stormy-temple-57264.herokuapp.com/
