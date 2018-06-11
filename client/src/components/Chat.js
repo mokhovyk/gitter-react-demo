@@ -1,25 +1,27 @@
-import React, { Component } from 'react';
+// @flow
+import React from 'react';
 
-class Chat extends Component {
-  render() {
-    const { id, messages, isLoading } = this.props;
+type PropsT = {
+  messages: Array<any>,
+  isLoading: boolean,
+  name: string,
+  onLoadMore: any,
+  hasMore: boolean
+};
 
-    return (
-      <div>
-        <h2>{id}</h2>
-        <h4>{messages && messages.length}</h4>
-  
-        {isLoading && <div>Loading...</div>}
-        {!isLoading && messages && messages.length !== 0 &&
-          <ul className="list-group">
-            {messages.map(item => (
-              <li key={item.id} className="list-group-item">{item.text}</li>
-            ))}
-          </ul>
-        }
-      </div>
-    );
-  }
-}
+const Chat = ({ messages, isLoading, name, onLoadMore, hasMore }: PropsT) => (
+  <div>
+    <h2>{name}</h2>
+    {messages && messages.length !== 0 &&
+      <ul className="list-group">
+        {messages.map((item: any) => (
+          <li key={item.id} className="list-group-item">{item.text}</li>
+        ))}
+      </ul>
+    }
+    {isLoading && <div>Loading...</div>}
+    {!isLoading && hasMore && <button onClick={onLoadMore}>Load more</button>}
+  </div>
+);
 
 export default Chat;

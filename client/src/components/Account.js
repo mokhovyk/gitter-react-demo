@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
+// @flow
+import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-class Account extends Component {
-  render() {
-    const { isAuthorized, userId, userName, displayName, avatarUrl } = this.props;
+type PropsT = {
+  userId: string,
+  userName: string,
+  displayName: string,
+  avatarUrl: string,
+};
 
-    return (
-      <ul className="list-group">
-        <li className="list-group-item"><h2>My account</h2></li>
-        <li className="list-group-item"><img src={avatarUrl} alt="avatar" /></li>
-        <li className="list-group-item">userId: {userId}</li>
-        <li className="list-group-item">userName: {userName}</li>
-        <li className="list-group-item">displayName: {displayName}</li>
-      </ul>
-    );
-  }
-}
+const Account = ({ userId, userName, displayName, avatarUrl }: PropsT) => (
+  <ul className="list-group">
+    <li className="list-group-item"><h2>My account</h2></li>
+    <li className="list-group-item"><img src={avatarUrl} alt="avatar" /></li>
+    <li className="list-group-item">userId: {userId}</li>
+    <li className="list-group-item">userName: {userName}</li>
+    <li className="list-group-item">displayName: {displayName}</li>
+  </ul>
+);
 
 const mapStateToProps = ({ user }) => ({
   ...user,

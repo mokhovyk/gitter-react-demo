@@ -4,32 +4,34 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Auth from '../components/Auth';
 import Account from '../components/Account';
-import ChatContainer from '../containers/ChatContainer';
-import Rooms from '../components/Rooms';
+import ChatContainer from './ChatContainer';
+import Rooms from './Rooms';
+import { fetchUser } from '../actions/user';
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     exact: true,
     sidebar: null,
     main: () => <h2>Home</h2>
   },
   {
-    path: "/account",
+    path: '/account',
     sidebar: () => <Link to="/room" className="btn btn-primary">Go to rooms</Link>,
     main: Account,
   },
   {
-    path: "/room",
+    path: '/room',
     exact: true,
     sidebar: Rooms,
     main: () => <div>choose room!</div>,
   },
   {
-    path: "/room/:id",
+    path: '/room/:id',
     exact: true,
     sidebar: Rooms,
     main: ChatContainer
@@ -37,6 +39,10 @@ const routes = [
 ];
 
 class Root extends Component {
+  componentDidMount() {
+    this.props.fetchUserAction();
+  }
+
   render() {
     return (
       <Router>
@@ -52,7 +58,7 @@ class Root extends Component {
               <aside className="col-3 p-3">
                 {routes.map((route, index) => (
                   <Route
-                    key={index}
+                    key={index.toString()}
                     path={route.path}
                     exact={route.exact}
                     component={route.sidebar}
@@ -62,7 +68,7 @@ class Root extends Component {
               <main className="col-9 p-3">
                 {routes.map((route, index) => (
                   <Route
-                    key={index}
+                    key={index.toString()}
                     path={route.path}
                     exact={route.exact}
                     component={route.main}
@@ -77,4 +83,6 @@ class Root extends Component {
   }
 }
 
-export default Root;
+export default connect(null, {
+  fetchUserAction: fetchUser,
+})(Root);

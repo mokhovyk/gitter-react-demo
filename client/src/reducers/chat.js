@@ -7,6 +7,7 @@ import {
 export const INITIAL_CHAT_STATE = {
   isLoading: false,
   isError: false,
+  hasMore: true,
   messages: [],
 };
 

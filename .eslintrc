@@ -1,0 +1,22 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "plugins": [
+    "react",
+    "flowtype"
+  ],
+  "rules": {
+    "function-paren-newline": ["error", "consistent"],
+    "react/jsx-filename-extension": 0
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
+  },
+  "globals": {
+    "jest": true,
+    "window": true,
+    "document": true
+  }
+}

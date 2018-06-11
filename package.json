@@ -12,6 +12,8 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2017": "^6.24.1",
@@ -19,8 +21,20 @@
     "babel-preset-stage-2": "^6.22.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-flowtype": "^2.46.2",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.0",
+    "eslint-plugin-react": "^7.7.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "flow-bin": "^0.74.0",
+    "jest": "^20.0.4",
     "passport": "^0.4.0",
     "passport-oauth2": "^1.4.0",
     "path": "^0.12.7",
@@ -33,6 +47,8 @@
     "start": "node server/index.js",
     "build": "webpack",
     "dev": "NODE_ENV=development webpack",
-    "test": "NODE_ENV=test mocha"
+    "test": "NODE_ENV=test jest --coverage --runInBand --no-cache",
+    "lint": "eslint src --cache --cache-location '.eslintcachefile'",
+    "flow": "flow"
   }
 }

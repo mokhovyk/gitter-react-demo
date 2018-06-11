@@ -4,7 +4,13 @@ import { Link } from 'react-router-dom';
 
 import { fetchRooms } from '../actions/rooms';
 
-class Rooms extends PureComponent {
+type PropsT = {
+  userId: string,
+  items: Array<any>,
+  fetchRoomsAction: any,
+};
+
+class Rooms extends PureComponent<PropsT> {
   componentDidMount() {
     const { userId } = this.props;
 
@@ -15,25 +21,30 @@ class Rooms extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const { userId } = this.props;
-    
+
     if (userId && prevProps.userId !== userId) {
-       this.props.fetchRoomsAction(userId);
+      this.props.fetchRoomsAction(userId);
     }
   }
 
   render() {
-    const { items } = this.props;
+    const { items, match } = this.props;
+    const activeItemId = match ? match.params.id : '';
 
     return (
       <Fragment>
-        <ul className="list-group">
-          {items.map((item) => (
-            <li key={item.id} className="list-group-item">
-              <img height="50px" src={item.avatarUrl} />
-              <Link to={`/room/${item.id}`}>{item.name}</Link>
-            </li>
+        <div className="list-group">
+          {items.map((item: any) => (
+            <Link
+              key={item.id}
+              to={`/room/${item.id}`}
+              className={`list-group-item list-group-item-action ${activeItemId === item.id ? 'active' : ''}`}
+            >
+              <img height="42px" src={item.avatarUrl} className="mr-3" alt="room_pic" />
+              <span>{item.name}</span>
+            </Link>
           ))}
-        </ul>
+        </div>
       </Fragment>
     );
   }
