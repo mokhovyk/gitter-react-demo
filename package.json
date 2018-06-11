@@ -44,11 +44,13 @@
     "webpack-cli": "^3.0.3"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "build": "webpack",
-    "dev": "NODE_ENV=development webpack",
+    "clean": "rm -rf ./client/build",
+    "server": "node server/index.js",
+    "build": "NODE_ENV=production webpack",
+    "build:dev": "NODE_ENV=development webpack",
     "test": "NODE_ENV=test jest --coverage --runInBand --no-cache",
     "lint": "eslint src --cache --cache-location '.eslintcachefile'",
-    "flow": "flow"
+    "flow": "flow",
+    "start": "npm run clean && npm run build && npm run server"
   }
 }
