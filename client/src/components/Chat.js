@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { Fragment } from 'react';
 
 type PropsT = {
   messages: Array<any>,
@@ -10,18 +10,21 @@ type PropsT = {
 };
 
 const Chat = ({ messages, isLoading, name, onLoadMore, hasMore }: PropsT) => (
-  <div>
+  <Fragment>
     <h2>{name}</h2>
     {messages && messages.length !== 0 &&
-      <ul className="list-group">
+      <div className="flex-colum mb-3">
         {messages.map((item: any) => (
-          <li key={item.id} className="list-group-item">{item.text}</li>
+          <div key={item.id} className="py-2 border-bottom">
+            <div className="text-muted">{item.fromUser.displayName}</div>
+            <div dangerouslySetInnerHTML={{ __html: item.html }} />
+          </div>
         ))}
-      </ul>
+      </div>
     }
     {isLoading && <div>Loading...</div>}
-    {!isLoading && hasMore && <button onClick={onLoadMore}>Load more</button>}
-  </div>
+    {!isLoading && hasMore && <button onClick={onLoadMore} className="btn btn-primary">Load more</button>}
+  </Fragment>
 );
 
 export default Chat;

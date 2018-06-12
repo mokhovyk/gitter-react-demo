@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account renders connected container 1`] = `
+<ul
+  className="list-group"
+>
+  <li
+    className="list-group-item"
+  >
+    <h2>
+      My account
+    </h2>
+  </li>
+  <li
+    className="list-group-item"
+  >
+    <img
+      alt="avatar"
+    />
+  </li>
+  <li
+    className="list-group-item"
+  >
+    userId: 
+  </li>
+  <li
+    className="list-group-item"
+  >
+    userName: 
+  </li>
+  <li
+    className="list-group-item"
+  >
+    displayName: 
+  </li>
+</ul>
+`;
+
+exports[`Account renders correctly 1`] = `
+<ul
+  className="list-group"
+>
+  <li
+    className="list-group-item"
+  >
+    <h2>
+      My account
+    </h2>
+  </li>
+  <li
+    className="list-group-item"
+  >
+    <img
+      alt="avatar"
+      src="avatar.png"
+    />
+  </li>
+  <li
+    className="list-group-item"
+  >
+    userId: 
+    userId123
+  </li>
+  <li
+    className="list-group-item"
+  >
+    userName: 
+    johndoe
+  </li>
+  <li
+    className="list-group-item"
+  >
+    displayName: 
+    John Doe
+  </li>
+</ul>
+`;

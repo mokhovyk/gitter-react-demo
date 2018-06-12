@@ -7,10 +7,12 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Auth from '../components/Auth';
-import Account from '../components/Account';
 import ChatContainer from './ChatContainer';
 import Rooms from './Rooms';
+import Auth from '../components/Auth';
+import Account from '../components/Account';
+import LinkToRooms from '../components/LinkToRooms';
+
 import { fetchUser } from '../actions/user';
 
 type PropsT = {
@@ -22,19 +24,19 @@ const routes = [
     path: '/',
     exact: true,
     sidebar: null,
-    main: () => <h2>Home</h2>
+    main: LinkToRooms,
   },
   {
     path: '/account',
     exact: false,
-    sidebar: () => <Link to="/room" className="btn btn-primary">Go to rooms</Link>,
+    sidebar: LinkToRooms,
     main: Account,
   },
   {
     path: '/room',
     exact: true,
     sidebar: Rooms,
-    main: () => <div>choose room!</div>,
+    main: () => <div>Choose room!</div>,
   },
   {
     path: '/room/:id',
@@ -44,7 +46,7 @@ const routes = [
   }
 ];
 
-class Root extends Component<PropsT> {
+class App extends Component<PropsT> {
   componentDidMount() {
     this.props.fetchUserAction();
   }
@@ -91,4 +93,4 @@ class Root extends Component<PropsT> {
 
 export default connect(null, {
   fetchUserAction: fetchUser,
-})(Root);
+})(App);

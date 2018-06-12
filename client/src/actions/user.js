@@ -23,8 +23,8 @@ export const receiveUser = (data: Object) => ({
 export const fetchUser = () => async (dispatch: FunctionType) => {
   try {
     const payload = await api(`/user`);
-    dispatch(receiveUser(payload))
+    dispatch(receiveUser(payload));
   } catch (error) {
-    throw Error();
+    dispatch(removeUser());
   }
 };

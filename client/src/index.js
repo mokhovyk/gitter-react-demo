@@ -4,13 +4,13 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import configureStore from './store/configure-store';
-import Root from './containers/Root';
+import App from './containers/App';
 
 const store = configureStore();
 
 render(
   <Provider store={store}>
-    <Root />
+    <App />
   </Provider>,
   window.document.getElementById('root'),
 );

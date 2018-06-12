@@ -9,7 +9,7 @@ type PropsT = {
   avatarUrl: string,
 };
 
-const Account = ({ userId, userName, displayName, avatarUrl }: PropsT) => (
+export const AccountComponent = ({ userId, userName, displayName, avatarUrl }: PropsT) => (
   <ul className="list-group">
     <li className="list-group-item"><h2>My account</h2></li>
     <li className="list-group-item"><img src={avatarUrl} alt="avatar" /></li>
@@ -23,4 +23,4 @@ const mapStateToProps = ({ user }) => ({
   ...user,
 });
 
-export default connect(mapStateToProps)(Account);
+export default connect(mapStateToProps)(AccountComponent);

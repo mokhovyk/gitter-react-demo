@@ -29,6 +29,7 @@ export default (state = INITIAL_STATE, action) => {
     case RECEIVE_ROOMS:
       return {
         ...state,
+        isLoading: false,
         items: action.items,
       };
     case INVALIDATE_ROOMS:

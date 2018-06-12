@@ -5,7 +5,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 module.exports = {
   mode: isDevelopment ? 'development': 'production',
 
-  entry: path.join(__dirname, '/client/src/index.js'),
+  entry: ['babel-polyfill', path.join(__dirname, '/client/src/index.js')],
 
   output: {
     path: path.join(__dirname, '/client/build/'),
@@ -18,7 +18,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader?presets[]=es2017,presets[]=react,presets[]=stage-2',
+          loader: 'babel-loader',
+          options: {
+            presets: ['env', 'react', 'stage-0']
+          }
         }
       }
     ]

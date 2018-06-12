@@ -6,19 +6,20 @@ import user from '../reducers/user';
 import rooms from '../reducers/rooms';
 import chatCollection from '../reducers/chatCollection';
 
-const middlewares = [thunk];
+const defaultMiddlewares = [thunk];
 
 if (process.env.NODE_ENV === 'development') {
-  middlewares.push(createLogger());
+  defaultMiddlewares.push(createLogger());
 }
 
-export default () => (
+export default (optionalReducers, optionalMiddlewares = []) => (
   createStore(
     combineReducers({
       user,
       rooms,
       chatCollection,
+      ...optionalReducers,
     }),
-    applyMiddleware(...middlewares),
+    applyMiddleware(...defaultMiddlewares, ...optionalMiddlewares),
   )
 )

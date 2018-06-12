@@ -47,7 +47,14 @@ class ChatContainer extends Component<PropsT, StateT> {
     const { rooms } = this.props;
 
     if (prevProps.rooms !== rooms) {
-      this.props.fetchChatMessagesAction(this.state.id);
+      const { id } = this.state;
+      const activeRoom = rooms.find(item => item.id === id) || {};
+
+      this.setState({
+        name: activeRoom.name,
+      });
+
+      this.props.fetchChatMessagesAction(id);
     }
   }
 

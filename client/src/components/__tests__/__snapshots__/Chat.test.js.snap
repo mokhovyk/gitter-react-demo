@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chat renders correctly 1`] = `
+<React.Fragment>
+  <h2>
+    My Chat
+  </h2>
+  <button
+    className="btn btn-primary"
+    onClick={[Function]}
+  >
+    Load more
+  </button>
+</React.Fragment>
+`;
+
+exports[`Chat renders correctly without load more button 1`] = `
+<React.Fragment>
+  <h2>
+    My Chat
+  </h2>
+</React.Fragment>
+`;
