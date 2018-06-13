@@ -3,7 +3,6 @@ export const REMOVE_USER = 'REMOVE_USER';
 export const REQUEST_ROOMS = 'REQUEST_ROOMS';
 export const RECEIVE_ROOMS = 'RECEIVE_ROOMS';
 export const INVALIDATE_ROOMS = 'RECEIVE_ROOMS';
-export const SET_ACTIVE_ROOM = 'SET_ACTIVE_ROOM';
 export const REQUEST_CHAT = 'REQUEST_CHAT';
 export const RECEIVE_CHAT = 'RECEIVE_CHAT';
 export const INVALIDATE_CHAT = 'INVALIDATE_CHAT';

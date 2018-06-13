@@ -3,12 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchChatMessages } from '../actions/chat';
-import { setActiveRoom } from '../actions/rooms';
 
 import Chat from '../components/Chat';
 
 type PropsT = {
-  setActiveRoomAction: (string) => void,
   fetchChatMessagesAction: (string, ?string) => void,
   match: Object,
   chatCollection: Object,
@@ -79,6 +77,5 @@ const mapStateToProps = ({ chatCollection, rooms }): Object => ({
 });
 
 export default connect(mapStateToProps, {
-  setActiveRoomAction: setActiveRoom,
   fetchChatMessagesAction: fetchChatMessages,
 })(ChatContainer);
